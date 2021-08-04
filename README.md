@@ -13,10 +13,10 @@ In the theme of moving from a simple command line application static website to
 dynamic web app, it's time to move Playlister to the interwebs using Sinatra. In
 this lab, you'll be:
 
-1.  Giving our "library" of songs a dynamic web interface
+1. Giving our "library" of songs a dynamic web interface
 
-2.  Creating a few complex forms that allow you to create and edit Artists,
-    Songs and Genres.
+2. Creating a few complex forms that allow you to create and edit Artists,
+   Songs and Genres.
 
 ## File Structure
 
@@ -24,7 +24,7 @@ Your application should use the following file structure. Notice how there are
 separate controllers for songs, artists, and genres. Separately, we have
 sub-directories for views for songs, artists, and genres.
 
-```
+```txt
 ├── app
 │   ├── controllers
 │   │   ├── application_controller.rb
@@ -61,35 +61,35 @@ in `db/data`. There is a `LibraryParser` class included in the `lib` folder that
 you may use, though it may need some tweaking to work with your specific
 application. Your associations should follow this pattern:
 
-1.  An Artist can have multiple songs and multiple genres
+1. An Artist can have multiple songs and multiple genres
 
-2.  A Genre can have multiple artists and multiple songs
+2. A Genre can have multiple artists and multiple songs
 
-3.  A Song can belong to ONE Artist and multiple genres
+3. A Song can belong to ONE Artist and multiple genres
 
-4.  How would we implement the relationship of a song having many genres and
-    genre having many songs? In order to establish a "many-to-many" relationship,
-    we'll need a join table. You will need a `SongGenre` class to go along with this
-    table in the database
+4. How would we implement the relationship of a song having many genres and
+   genre having many songs? In order to establish a "many-to-many" relationship,
+   we'll need a join table. You will need a `SongGenre` class to go along with this
+   table in the database
 
 You should build the following routes:
 
-1.  `/songs`
+**1.** `/songs`
 
 - This should present the user with a list of all songs in the library.
 - Each song should be a clickable link to that particular song's show page.
 
-2.  `/genres`
+**2.** `/genres`
 
 - This should present the user with a list of all genres in the library.
 - Each genre should be a clickable link to that particular genre's show page.
 
-3.  `/artists`
+**3.** `/artists`
 
 - This should present the user with a list of all artists in the library.
 - Each artist should be a clickable link to that particular artist's show page.
 
-4.  `/songs/:slug`
+**4.** `/songs/:slug`
 
 - Any given song's show page should have links to that song's artist and
   each genre associated with the song.
@@ -97,12 +97,12 @@ You should build the following routes:
   `/songs/new` could interpret `new` as a slug if that controller action isn't
   defined first.
 
-5.  `/artists/:slug`
+**5.** `/artists/:slug`
 
 - Any given artist's show page should have links to each of his or her songs
   and genres.
 
-6.  `/genres/:slug`
+**6.** `/genres/:slug`
 
 - Any given genre's show page should have links to each of its artists and
   songs.
@@ -129,13 +129,13 @@ to do next.
 
 For the last spec `05_song_form_spec.rb` you need to implement the following features:
 
-1.  `/songs/new`
+**1.** `/songs/new`
 
 - Be able to create a new song
 - Genres should be presented as checkboxes
 - Be able to enter the Artist's name in a text field (only one Artist per song.)
 
-2.  `/songs/:slug/edit`
+**2.** `/songs/:slug/edit`
 
 - Be able to change everything about a song, including the genres associated
   with it and its artist.
@@ -199,7 +199,12 @@ params = {
 
 ```html
 <% Genre.all.each do |genre| %>
-  <input id="<%= genre.name %>" type="checkbox" name="genres[]" value="<%= genre.id %>">
+<input
+  id="<%= genre.name %>"
+  type="checkbox"
+  name="genres[]"
+  value="<%= genre.id %>"
+/>
 <% end %>
 ```
 
@@ -235,9 +240,7 @@ To display this message in the view, just add
 ```html
 <!-- views/songs/show.erb -->
 
-<% if flash.has?(:message) %>
-  <%= flash[:message] %>
-<% end %>
+<% if flash.has?(:message) %> <%= flash[:message] %> <% end %>
 ```
 
 to the top of the view.
